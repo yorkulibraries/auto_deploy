@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+APP=$1
+BRANCH=$2
+REPO=$3
+
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 SCRIPT=`basename $0`
@@ -7,10 +11,6 @@ LOCK=/tmp/${SCRIPT}_${APP}.lock
 
 [ -f $LOCK ] && exit
 touch $LOCK
-
-APP=$1
-BRANCH=$2
-REPO=$3
 
 WORKFLOW_STATUS_SCRIPT=${SCRIPT_DIR}/get_latest_action_status.rb 
 
