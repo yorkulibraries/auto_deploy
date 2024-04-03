@@ -3,7 +3,7 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 SCRIPT=`basename $0`
-LOCK=/tmp/${SCRIPT}.lock
+LOCK=/tmp/${SCRIPT}_${APP}.lock
 
 [ -f $LOCK ] && exit
 touch $LOCK
@@ -22,7 +22,7 @@ BUNDLE_LOG=/tmp/$$.bundle.log
 DB_LOG=/tmp/$$.db.log
 ASSETS_LOG=/tmp/$$.assets.log
 STATUS=/tmp/$$.status.log
-LOG=/tmp/${SCRIPT}.log
+LOG=/tmp/${SCRIPT}_${APP}.log
 echo > $LOG
 
 cd /home/${APP}/${APP}
