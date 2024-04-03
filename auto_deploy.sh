@@ -15,6 +15,7 @@ touch $LOCK
 WORKFLOW_STATUS_SCRIPT=${SCRIPT_DIR}/get_latest_action_status.rb 
 
 source /home/${APP}/.profile &> /dev/null
+source /home/${APP}/.${APP} &> /dev/null
 
 LAST_TIMESTAMP=/home/$APP/.autodeploy
 touch $LAST_TIMESTAMP
@@ -72,9 +73,9 @@ if [ "$conclusion" == "success" ] ; then
 
     RAILS_ENV=production bundle install &> $BUNDLE_LOG
     bundle_failed=$?
-    RAILS_ENV=production bundle exec rake db:migrate &> $DB_LOG
+    RAILS_ENV=production DATABASE_URL=$DATABASE_URL bundle exec rake db:migrate &> $DB_LOG
     db_failed=$?
-    RAILS_ENV=production bundle exec rake assets:precompile &> $ASSETS_LOG
+    RAILS_ENV=production DATABASE_URL=$DATABASE_URL bundle exec rake assets:precompile &> $ASSETS_LOG
     assets_failed=$?
 
     if [ $bundle_failed -eq 1 ]; then
