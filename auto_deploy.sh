@@ -33,6 +33,7 @@ conclusion=`echo $workflow_run | cut -d' ' -f2`
 run_time=`echo $workflow_run | cut -d' ' -f1`
 run_unixtime=`date "+%s" -d "$run_time"`
 last_run=`cat $LAST_TIMESTAMP` 
+last_run=`expr $last_run + 0`
 time_diff=`expr $run_unixtime - $last_run`
 
 if [ $time_diff -lt 60 ] ; then
