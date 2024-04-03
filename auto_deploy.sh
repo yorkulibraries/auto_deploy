@@ -17,6 +17,7 @@ WORKFLOW_STATUS_SCRIPT=${SCRIPT_DIR}/get_latest_action_status.rb
 source /home/${APP}/.profile &> /dev/null
 
 LAST_TIMESTAMP=/home/$APP/.autodeploy
+touch $LAST_TIMESTAMP
 
 BUNDLE_LOG=/tmp/$$.bundle.log
 DB_LOG=/tmp/$$.db.log
