@@ -94,10 +94,10 @@ if [ "$conclusion" == "success" ] ; then
     fi
 
     if [ $bundle_failed -eq 0 ] && [ $db_failed -eq 0 ] && [ $assets_failed -eq 0 ]; then 
-      sudo systemctl stop etd-qa &> /dev/null
-      sudo systemctl start etd-qa &> /dev/null
+      sudo systemctl stop $APP &> /dev/null
+      sudo systemctl start $APP  &> /dev/null
       sleep 30
-      sudo systemctl status etd-qa 2>/dev/null > $STATUS
+      sudo systemctl status $APP 2>/dev/null > $STATUS
       started=`cat $STATUS | grep Listening`
       if [ "$started" != "" ]; then
         echo "New changes deployed successfully."
