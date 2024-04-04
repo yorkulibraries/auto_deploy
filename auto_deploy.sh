@@ -95,21 +95,9 @@ if [ "$conclusion" == "success" ] ; then
     fi
 
     if [ $bundle_failed -eq 0 ] && [ $db_failed -eq 0 ] && [ $assets_failed -eq 0 ]; then 
-      sudo systemctl stop $APP &> /dev/null
-      sudo systemctl start $APP  &> /dev/null
-      sleep 30
-      sudo systemctl status $APP 2>/dev/null > $STATUS
-      started=`cat $STATUS | grep Listening`
-      if [ "$started" != "" ]; then
-        echo "New changes deployed successfully."
-        echo
-        cat $STATUS
-        echo $run_unixtime > $LAST_TIMESTAMP
-      else
-        echo "Service failed to start after git pull."
-        echo
-        cat $STATUS
-      fi 
+      touch /tmp/auto_restart_${APP}.service
+      echo "New changes deployed successfully."
+      echo $run_unixtime > $LAST_TIMESTAMP
     fi
   fi
 else
